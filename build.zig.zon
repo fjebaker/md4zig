@@ -1,0 +1,11 @@
+.{
+    .name = "cosroe-www",
+    .version = "0.0.1",
+    .dependencies = .{
+        .md4c = .{
+            .url = "https://github.com/fjebaker/md4c-zig/archive/master.tar.gz",
+            .hash = "12201fcca5609947cf29880420df8043ebbbb72a27388a74ff45c0a16dcfaa1e8b9c",
+        },
+    },
+    .paths = .{""},
+}
