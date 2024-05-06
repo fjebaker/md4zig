@@ -1,6 +1,6 @@
 .{
     .name = "cosroe-www",
-    .version = "0.0.1",
+    .version = "0.0.2",
     .dependencies = .{
         .md4c = .{
             .url = "https://github.com/fjebaker/md4c-zig/archive/master.tar.gz",
