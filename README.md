@@ -2,7 +2,7 @@
 
 A Zig wrapper around [md4c](https://github.com/mity/md4c) for parsing Markdown.
 
-Exposes a single function that puts a parser type together from comptime-known Zig functions. The generalisation to using vtables is left as an exercise to the user.
+Exposes a single function that puts a parser type together from comptime-known Zig functions. The parses itself also exposes only a single `parse` function. The generalisation to using vtables is left as an exercise to the user.
 
 ## Usage
 
@@ -35,10 +35,9 @@ const Impl = struct {
 };
 
 pub fn main() !void {
-    const impl: Impl = .{};
-
-    var parser = MD4CParser(Impl).init(impl, .{});
-    try parser.parse("# Hello World\nHow are *you*!");
+    var impl: TestImpl = .{};
+    var parser = MD4CParser(TestImpl).init(.{});
+    try parser.parse(&impl, "# Hello World\nHow are *you*!");
 }
 ```
 
