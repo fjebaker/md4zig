@@ -112,6 +112,7 @@ pub const Attribute = struct {
 
     /// Get all of the text in the attribute
     pub fn all(a: Attribute) []const u8 {
+        if (a.c_data.size == 0) return "";
         return a.c_data.text[0..a.c_data.size];
     }
 
