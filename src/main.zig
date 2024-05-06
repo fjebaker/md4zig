@@ -110,9 +110,13 @@ pub const Attribute = struct {
     c_data: c.MD_ATTRIBUTE,
     index: usize = 0,
 
-    pub fn next(a: *Attribute) ?Text {
-        _ = a;
-        return null;
+    /// Get all of the text in the attribute
+    pub fn all(a: Attribute) []const u8 {
+        return a.c_data.text[0..a.c_data.size];
+    }
+
+    pub fn next(_: *Attribute) ?Text {
+        @compileError("Not implemented yet");
     }
 };
 
