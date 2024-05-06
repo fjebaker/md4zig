@@ -1,6 +1,6 @@
 # md4zig
 
-A Zig wrapper of [md4c](https://github.com/mity/md4c) for parsing Markdown.
+A Zig wrapper around [md4c](https://github.com/mity/md4c) for parsing Markdown.
 
 Exposes a single function that puts a parser type together from comptime-known Zig functions. The generalisation to using vtables is left as an exercise to the user.
 
