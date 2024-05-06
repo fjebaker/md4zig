@@ -13,6 +13,7 @@ pub fn build(b: *std.Build) void {
     const md4c = md4c_dep.artifact("md4c");
 
     const mod = b.addModule("md4zig", .{
+        .root_source_file = .{ .path = "src/main.zig" },
         .link_libc = true,
     });
     mod.linkLibrary(md4c);
