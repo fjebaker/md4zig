@@ -42,7 +42,7 @@ pub fn main() !void {
 }
 ```
 
-This will then something like output:
+This will then output something like:
 
 ```
 >> main.BlockInfo{ .doc = void }
