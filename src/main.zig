@@ -476,26 +476,3 @@ pub fn MD4CParser(comptime Implementation: type) type {
         }
     };
 }
-
-const Impl = struct {
-    fn enterBlock(_: *Impl, block: BlockInfo) !void {
-        std.debug.print(">> {any}\n", .{block});
-    }
-    fn leaveBlock(_: *Impl, block: BlockInfo) !void {
-        std.debug.print("<< {any}\n", .{block});
-    }
-    fn enterSpan(_: *Impl, span: SpanInfo) !void {
-        std.debug.print(">> {any}\n", .{span});
-    }
-    fn leaveSpan(_: *Impl, span: SpanInfo) !void {
-        std.debug.print("<< {any}\n", .{span});
-    }
-    fn textCallback(_: *Impl, text: Text) !void {
-        std.debug.print("   {any}\n", .{text});
-    }
-};
-
-pub fn main() !void {
-    var parser = MD4CParser(Impl).init(.{}, .{});
-    try parser.parse("# Hello World\nHow are *you*");
-}
