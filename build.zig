@@ -36,6 +36,9 @@ pub fn build(b: *std.Build) void {
         .optimize = optimize,
     });
 
+    lib_unit_tests.linkLibC();
+    lib_unit_tests.linkLibrary(md4c);
+
     const run_lib_unit_tests = b.addRunArtifact(lib_unit_tests);
 
     const test_step = b.step("test", "Run unit tests");

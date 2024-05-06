@@ -351,7 +351,6 @@ pub fn MD4CParser(comptime Implementation: type) type {
         };
 
         c_parser: c.MD_PARSER,
-        implementation: Implementation,
 
         fn enter_block(
             block_type: c.MD_BLOCKTYPE,
@@ -444,7 +443,7 @@ pub fn MD4CParser(comptime Implementation: type) type {
         }
 
         /// Initialize a parser.
-        pub fn init(impl: Implementation, opts: Options) Self {
+        pub fn init(opts: Options) Self {
             const parser: c.MD_PARSER = .{
                 .abi_version = 0,
                 .flags = @as(c_uint, @bitCast(opts.flags)),
@@ -456,17 +455,16 @@ pub fn MD4CParser(comptime Implementation: type) type {
             };
             return .{
                 .c_parser = parser,
-                .implementation = impl,
             };
         }
 
         /// Parse a given text
-        pub fn parse(p: *Self, text: []const u8) !void {
+        pub fn parse(p: *Self, impl: *Implementation, text: []const u8) !void {
             const errno = c.md_parse(
                 text.ptr,
                 @intCast(text.len),
                 &p.c_parser,
-                @alignCast(@ptrCast(&p.implementation)),
+                @alignCast(@ptrCast(impl)),
             );
 
             switch (errno) {
@@ -475,4 +473,28 @@ pub fn MD4CParser(comptime Implementation: type) type {
             }
         }
     };
+}
+
+const TestImpl = struct {
+    pub fn enterBlock(_: *TestImpl, block: BlockInfo) !void {
+        std.debug.print(">> {any}\n", .{block});
+    }
+    pub fn leaveBlock(_: *TestImpl, block: BlockInfo) !void {
+        std.debug.print("<< {any}\n", .{block});
+    }
+    pub fn enterSpan(_: *TestImpl, span: SpanInfo) !void {
+        std.debug.print(">> {any}\n", .{span});
+    }
+    pub fn leaveSpan(_: *TestImpl, span: SpanInfo) !void {
+        std.debug.print("<< {any}\n", .{span});
+    }
+    pub fn textCallback(_: *TestImpl, text: Text) !void {
+        std.debug.print("   {any}\n", .{text});
+    }
+};
+
+test "example" {
+    var impl: TestImpl = .{};
+    var parser = MD4CParser(TestImpl).init(.{});
+    try parser.parse(&impl, "# Hello World\nHow are *you*!");
 }
