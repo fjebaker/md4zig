@@ -1,5 +1,5 @@
 .{
-    .name = "cosroe-www",
+    .name = "md4zig",
     .version = "0.0.2",
     .dependencies = .{
         .md4c = .{
