@@ -1,10 +1,11 @@
 .{
-    .name = "md4zig",
+    .name = .md4zig,
+    .fingerprint = 0x28dccacf6d46d665,
     .version = "0.0.2",
     .dependencies = .{
         .md4c = .{
             .url = "https://github.com/fjebaker/md4c-zig/archive/master.tar.gz",
-            .hash = "12209c45d16fc325333eea94af7deb1cef3657ce92978301a2c05bdb4d8333013138",
+            .hash = "N-V-__8AACQ2EACkO9xfiZaHghqNHogsdSPx_HbxMvFVoUl7",
         },
     },
     .paths = .{""},
